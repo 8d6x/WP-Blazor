@@ -1,0 +1,67 @@
+﻿@using WordPressPCL
+@using WordPressPCL.Utility
+@inject WordPressClient WPClient;
+
+
+@if (!_loading && null != _posts)
+{
+    @foreach (var post in _posts)
+    {
+        <article class="blog-post">
+                <FluentCard>
+            @if (0 != post.FeaturedMedia.GetValueOrDefault(0))
+            {
+                <div class="blog-post-thumbnail">
+                    <a href="/blog/@post.Slug" title="@post.Title.Rendered">
+                        <MediaImage MediaId="@post.FeaturedMedia" AltTitle="@post.Title.Rendered" CssClass="" DefaultSrc=""/>
+                    </a>
+                </div>
+            }
+            <div class="blog-post-title">
+                <h2>
+                    <a href="/blog/@post.Slug" title="@post.Title.Rendered">@((MarkupString) post.Title.Rendered)</a>
+                </h2>
+            </div>
+            <p class="blog-post-meta">@post.Date.ToShortDateString()</p>
+            <div class="blog-post-excerpt">
+                @((MarkupString) post.Excerpt.Rendered)
+            </div>
+            <div class="blog-post-meta">
+                <PostTags Post="post" />
+                <PostCategories Post="post" />
+            </div>
+                    </FluentCard>
+        </article>
+    }
+}else if (_loading)
+{
+    <Loading />
+}
+
+@code {
+
+    [Parameter]
+    public PostsQueryBuilder Query { get; set; }
+
+    private IEnumerable<WordPressPCL.Models.Post> _posts;
+    private bool _loading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await RefreshAsync();
+    }
+
+    private async Task RefreshAsync()
+    {
+        if (null == Query)
+            return;
+        
+        _loading = true;
+
+        _posts = await WPClient.Posts.QueryAsync(Query);
+
+        _loading = false;
+    }
+
+}
+    
