@@ -7,13 +7,13 @@
     <div class="post-tags">
         @foreach (var tag in _tags)
         {
-            <a href="tags/@tag.Id/@tag.Slug" class="badge badge-info" title="@tag.Name">@tag.Name</a>
+            <a href="tags/@tag.Id/@tag.Slug" class="badge badge-info" style="color:cornflowerblue" title="@tag.Name">@tag.Name</a>
         }
     </div>
 }
 else if (_loading)
 {
-    <Loading />
+    <FluentProgressRing></FluentProgressRing>
 }
 @code {
     [Parameter]

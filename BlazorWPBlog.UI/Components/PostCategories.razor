@@ -7,13 +7,13 @@
     <div class="post-categories">
         @foreach (var category in _categories)
         {
-            <a href="categories/@category.Id/@category.Slug" class="badge badge-info" title="@category.Name">@category.Name</a>
+            <a href="categories/@category.Id/@category.Slug" class="badge badge-info" style="color:cornflowerblue" title="@category.Name">@category.Name</a>
         }
     </div>
 }
 else if (_loading)
 {
-    <Loading />
+    <FluentProgressRing></FluentProgressRing>
 }
 @code {
     [Parameter]
