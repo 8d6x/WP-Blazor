@@ -4,20 +4,9 @@
 @using WordPressPCL.Utility
 @inject WordPressClient WPClient;
 
+<PageTitle>雑念置き場</PageTitle>
 <div class="page">
-    <main>
-                <div class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                    <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                        <span class="oi oi-home" aria-hidden="true"></span> Home
-                    </NavLink>
-            @*                    <NavLink class="nav-link" href="counter">
-                    <span class="oi oi-plus" aria-hidden="true"></span> Counter
-                    </NavLink>
-                    <NavLink class="nav-link" href="fetchdata">
-                        <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>*@
-            @*<a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>*@
-        </div>
+ 
 <div class="row">
     <div class="col blog-main">
         @if (null != _postsQuery)
@@ -25,8 +14,9 @@
             <Posts Query="@_postsQuery"></Posts>
         }
     </div>
+    <FluentButton>Prev</FluentButton>
+    <FluentButton>Next</FluentButton>
 </div>
-    </main>
 </div>
 @code
 {

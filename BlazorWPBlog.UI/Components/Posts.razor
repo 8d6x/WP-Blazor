@@ -2,7 +2,16 @@
 @using WordPressPCL.Utility
 @inject WordPressClient WPClient;
 
+<style>
+    .center {
+        text-align: center;
+    }
 
+        .center * {
+            margin-right: auto;
+            margin-left: auto;
+        }
+</style>
 @if (!_loading && null != _posts)
 {
     @foreach (var post in _posts)
@@ -35,8 +44,9 @@
     }
 }else if (_loading)
 {
-    <Loading />
-}
+    <FluentProgress></FluentProgress>
+@*    <Loading />
+*@}
 
 @code {
 

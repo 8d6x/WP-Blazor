@@ -1,0 +1,48 @@
+﻿@using WordPressPCL
+@using WordPressPCL.Models
+@using BlazorWPBlog.UI.Services
+@inject WordPressClient WPClient;
+@inject ICategoryService CategoryService;
+@inject IJSRuntime JSRuntime;
+
+@if (null != _categories)
+{
+        @foreach (var category in _categories)
+        {
+@*            <a href="categories/@category.Id/@category.Slug" class="badge badge-info" style="color:cornflowerblue" title="@category.Name">@category.Name</a>
+*@            <FluentButton @onclick="@(s => categorylink(category.Id, category.Slug))">
+                <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                    @category.Name
+                </NavLink>
+            </FluentButton>
+        }
+}
+else if (_loading)
+{
+    <FluentProgressRing></FluentProgressRing>
+}
+@code {
+    [Parameter]
+    public WordPressPCL.Models.Post Post { get; set; }
+
+    private IEnumerable<Category> _categories;
+    private bool _loading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+
+        _loading = true;
+
+        _categories = await WPClient.Categories.GetAllAsync();
+
+        _loading = false;
+    }
+    protected async void categorylink(int id, string slug)
+    {
+        string link = "categories/" + id + "/" + slug;
+        //NavigationManager.NavigateTo($"http://google.com/", false);
+        await JSRuntime.InvokeVoidAsync("openwindow", link);
+
+    }
+}

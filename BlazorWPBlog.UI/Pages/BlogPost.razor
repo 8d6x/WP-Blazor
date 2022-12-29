@@ -2,9 +2,10 @@
 @using WordPressPCL
 @using WordPressPCL.Utility
 @inject WordPressClient WPClient;
-
 @if (null != _post)
 {
+    <PageTitle>@((MarkupString)_post.Title.Rendered)</PageTitle>
+
 <div class="post-@_post.Id post">
     @if (0 != _post.FeaturedMedia.GetValueOrDefault(0))
     {
