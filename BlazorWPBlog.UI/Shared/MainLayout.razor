@@ -1,71 +1,35 @@
-﻿@using WordPressPCL
-@using WordPressPCL.Models
-@using BlazorWPBlog.UI.Services
-@inherits LayoutComponentBase
-@inject WordPressClient WPClient;
-@inject ICategoryService CategoryService;
+﻿@inherits LayoutComponentBase
 @inject IJSRuntime JSRuntime;
 
 
 
 <div class="page">
-@*    <div class="sidebar">
-        <SideMenu />
-    </div>*@
 
-    <main>
-        <FluentCard>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white  box-shadow  ">
-                <FluentButton >
+
+        <header class="header">
+                    <div class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
+                <span class="" aria-hidden="true"></span> 雑念置き場
             </NavLink>
-                </FluentButton>
-                <p>　</p>
-@*                @foreach (var category in categories)
-                {
-                    <a href="categories/@category.Id/@category.Slug" class="badge badge-info" style="color:cornflowerblue" title="@category.Name">@category.Name</a>
-                    <FluentButton @onclick="@(s => categorylink(category.Id, category.Slug))" >
-                        <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                        @category.Name
-                        </NavLink>
-                    </FluentButton>
-                }*@
                 <HeaderCategories/>
-            @*<a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>*@
-        </nav>
-        </FluentCard>
+        </div>
+        </header>
         <br />
-@*        <div class="sidebar">
-            
-        </div>*@
-        <article class="container">
+        <div class="menu">
+            <NavMenu/>
+        </div>
+        <div class="content">
             @Body
-        </article>
-    </main>
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+        </div>
+                <div class="rightmenu">
+            <SideMenu/>
+        </div>
+        <footer class="footer">
+        <div class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="" aria-hidden="true"></span> 雑念置き場
+            </NavLink>
+            <HeaderCategories />
+        </div>
+        </footer>
 </div>
-@code {
-    [Parameter]
-    public WordPressPCL.Models.Post Post { get; set; }
-
-    private IEnumerable<Category> categories;
-    public List<string>? categoryurl;
-
-
-
-    protected override async Task OnInitializedAsync()
-    {
-        categories = await WPClient.Categories.GetAllAsync();
-
-    }
-    protected async void categorylink(int id, string slug)
-    {
-        string link = "categories/" + id + "/" + slug;
-        //NavigationManager.NavigateTo($"http://google.com/", false);
-        await JSRuntime.InvokeVoidAsync("openwindow", link);
-
-    }
-}

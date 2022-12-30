@@ -20,5 +20,7 @@ builder.Services.AddSingleton(client);
 
 builder.Services.AddSingleton<ITagService, TagService>();
 builder.Services.AddSingleton<ICategoryService, CategoryService>();
+builder.Services.AddAntDesign();
+
 
 await builder.Build().RunAsync();

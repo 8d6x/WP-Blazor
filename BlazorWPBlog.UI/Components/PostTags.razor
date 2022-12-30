@@ -19,7 +19,7 @@ else if (_loading)
     [Parameter]
     public WordPressPCL.Models.Post Post { get; set; }
 
-    private IEnumerable<Tag> _tags;
+    private IEnumerable<WordPressPCL.Models.Tag> _tags;
     private bool _loading = false;
 
     protected override async Task OnInitializedAsync()

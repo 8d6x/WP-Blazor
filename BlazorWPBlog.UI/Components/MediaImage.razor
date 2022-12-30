@@ -5,6 +5,10 @@
 {
     <img src="@_imageUrl" class="@CssClass" alt="@AltTitle">
 }
+else if (_loading)
+{
+    <FluentProgress></FluentProgress>
+}
 
 @code {
     [Parameter]
@@ -21,14 +25,18 @@
 
     private string _imageUrl;
 
+    public bool _loading = false;
+
     protected override async Task OnInitializedAsync()
     {
         if (0 == MediaId.GetValueOrDefault(0))
             _imageUrl = DefaultSrc;
 
+            _loading = true;
         var media = await WPClient.Media.GetByIDAsync(MediaId.Value);
         if (null != media)
             _imageUrl = media.SourceUrl;
+            _loading = false;
     }
 
 }

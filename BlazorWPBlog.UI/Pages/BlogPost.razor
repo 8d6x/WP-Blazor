@@ -7,12 +7,16 @@
     <PageTitle>@((MarkupString)_post.Title.Rendered)</PageTitle>
 
 <div class="post-@_post.Id post">
+@*            <article class="blog-post" style="width:50%">
+                <FluentCard>
     @if (0 != _post.FeaturedMedia.GetValueOrDefault(0))
     {
-        <div class="post-thumb">
+        <div class="blog-post-thumb">
             <MediaImage MediaId="@_post.FeaturedMedia" AltTitle="@_post.Title.Rendered" />
         </div>
     }
+    </FluentCard>
+    </article>*@
 
     <div class="post-title">
         <h3>@((MarkupString) _post.Title.Rendered)</h3>
