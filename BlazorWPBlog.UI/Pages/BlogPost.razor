@@ -1,12 +1,24 @@
 ﻿@page "/blog/{Slug}"
 @using WordPressPCL
 @using WordPressPCL.Utility
+@inherits FluentComponentBase
 @inject WordPressClient WPClient;
+<style>
+    .center {
+        text-align: center;
+    }
+
+        .center * {
+            margin-right: auto;
+            margin-left: auto;
+        }
+</style>
 @if (null != _post)
 {
     <PageTitle>@((MarkupString)_post.Title.Rendered)</PageTitle>
 
 <div class="post-@_post.Id post">
+    <FluentCard>
 @*            <article class="blog-post" style="width:50%">
                 <FluentCard>
     @if (0 != _post.FeaturedMedia.GetValueOrDefault(0))
@@ -17,17 +29,36 @@
     }
     </FluentCard>
     </article>*@
+                <article class="blog-post">
+                @if (0 != _post.FeaturedMedia.GetValueOrDefault(0))
+                {
+                        <div class="blog-post-thumbnail">
+                            <a href="/blog/@_post.Slug" title="@_post.Title.Rendered">
+                                <MediaImage MediaId="@_post.FeaturedMedia" AltTitle="@_post.Title.Rendered" CssClass="" DefaultSrc=""/>
+                            </a>
+                        </div>
+                }
+            </article>
 
     <div class="post-title">
+        <FluentCard>
         <h3>@((MarkupString) _post.Title.Rendered)</h3>
+                    <p class="blog-post-meta">@_post.Date.ToShortDateString()</p>
+
+            </FluentCard>
     </div>
+            <div class="blog-post-meta">
+                Category: <PostCategories Post="_post" />
+            </div>
+
 
     <div class="post-content">@((MarkupString) _post.Content.Rendered)</div>
 
-    <div class="post-meta">
-        <PostTags Post="@_post" />
+    <div class="blog-post-meta">
+        <p>Tags:</p><PostTags Post="@_post" />
     </div>
-
+        </FluentCard>
+        <br/>
 </div>
 }
 

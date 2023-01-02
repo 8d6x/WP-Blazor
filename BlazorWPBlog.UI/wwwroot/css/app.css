@@ -49,26 +49,21 @@ a, .btn-link {
 
 .header {
     grid-area: header;
-/*    background-color: orange;
-*/}
+}
 
 .menu {
     grid-area: menu;
-    background-color: lightgreen;
 }
 .rightmenu {
     grid-area: rightmenu;
-    background-color: lightgreen;
 }
 
 .content {
     grid-area: content;
-    background-color: whitesmoke;
 }
 
 .footer {
     grid-area: footer;
-    background-color: skyblue;
 }
 
 #blazor-error-ui {
@@ -234,15 +229,26 @@ h1, h2, h3, h4, h5, h6 {
 .blog-post-thumbnail a {
     display: inline-block;
     width: 100%;
-    height: 200px;
+    height: 300px;
     overflow: hidden;
 }
 
     .blog-post-thumbnail a img {
         max-width: 100%;
-        margin-top: -25%;
+        margin-top: -20%;
     }
 
+.blog-post-thumb a {
+    display: inline-block;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+    .blog-post-thumb a img {
+        max-width: 100%;
+        margin-top: -25%;
+    }
 .blog-post-title {
     margin-bottom: .25rem;
     font-size: 2.5rem;
